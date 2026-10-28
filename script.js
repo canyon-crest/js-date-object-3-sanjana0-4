@@ -19,7 +19,7 @@
 let now = new Date();
 // STEP 2: Use .getDay() to get the day of the week as a number.
 //         Sunday = 0, Monday = 1, Tuesday = 2, ... Saturday = 6
-weekday = now.getDay();
+let weekday = now.getDay();
 // STEP 3: Create an array of day names:
 //         let days = ["Sunday", "Monday", "Tuesday", "Wednesday",
 //                     "Thursday", "Friday", "Saturday"];
@@ -43,14 +43,14 @@ warmUpDate.innerHTML = days[weekday]
 // STEP 7: Get the month using .getMonth()
 //         IMPORTANT: .getMonth() returns 0–11 (January = 0)
 //         so you must add 1 to get the correct month number.
-
+let month = now.getMonth() + 1;
 // STEP 8: Get the day of the month using .getDate()
-
+let day = now.getDate();
 // STEP 9: Get the year using .getFullYear()
-
+let year = now.getFullYear();
 // STEP 10: Build the date string: month + "/" + day + "/" + year
 //          Display it in the element with ID "myDate"
-
+myDate.innerHTML = month + "/" + day + "/" + year
 
 // ============================================
 //  PART 2: Elapsed Timer
@@ -61,7 +61,7 @@ warmUpDate.innerHTML = days[weekday]
 
 // STEP 11: Record the start time using new Date().getTime()
 //          This gives you the current time in milliseconds.
-
+let beginning = new Date().getTime();
 // STEP 12: Create a variable to hold the timer ID (for stopping later).
 //          Use setInterval() with a delay of 10 milliseconds.
 //          Inside the interval function:
@@ -70,7 +70,12 @@ warmUpDate.innerHTML = days[weekday]
 //          c) Display the elapsed time using .toFixed(3)
 //             in the element with ID "myTimer"
 
-
+let interval = setInterval(function(){
+    let current = new Date().getTime();
+    let passed = ((current - beginning)/1000).toFixed(3);
+    myTimer.innerHTML = passed;
+}, 10);
+let running = true
 // ============================================
 //  PART 3: Start/Stop Toggle Button
 // ============================================
@@ -80,7 +85,23 @@ warmUpDate.innerHTML = days[weekday]
 //     change button text to "Start"
 //   - If timer is stopped: restart it from 0 and change
 //     button text to "Stop"
-
+myBtn.addEventListener('click', function(){
+    if(running){
+        clearInterval(interval);
+        myBtn.innerHTML = "Start";
+        passed = (new Date().getTime() - beginning)/1000
+        running = false
+    }else{
+        
+        myBtn.innerHTML = "Stop"
+        interval = setInterval(function(){
+    current = new Date().getTime();
+    passed = ((current - beginning)/1000).toFixed(3);
+    myTimer.innerHTML = passed;
+}, 10);
+running = true
+    }
+})
 // STEP 13: Create a variable to track whether the timer is
 //          currently running (let running = true;)
 
