@@ -92,13 +92,13 @@ myBtn.addEventListener('click', function(){
         passed = (new Date().getTime() - beginning)/1000
         running = false
     }else{
-        
         myBtn.innerHTML = "Stop"
+        beginning = new Date().getTime() - passed*1000
         interval = setInterval(function(){
-    current = new Date().getTime();
-    passed = ((current - beginning)/1000).toFixed(3);
-    myTimer.innerHTML = passed;
-}, 10);
+            current = new Date().getTime()
+            passed = ((current - beginning)/1000).toFixed(3);
+            myTimer.innerHTML = passed;
+        }, 10);
 running = true
     }
 })
